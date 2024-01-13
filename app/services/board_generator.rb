@@ -3,10 +3,10 @@ class BoardGenerator
     new(**kwargs).call
   end
 
-  def initialize(width:, height:, mines:)
+  def initialize(width:, height:, mines_count:)
     @width = width
     @height = height
-    @mines = mines
+    @mines_count = mines_count
   end
 
   def call
@@ -22,13 +22,13 @@ class BoardGenerator
   EMPTY_CELL_MARKER = ' '.freeze
   MINE_MARKER = 'X'.freeze
 
-  attr_reader :width, :height, :mines
+  attr_reader :width, :height, :mines_count
 
   def cells_count
     width * height
   end
 
   def mines_indexes
-    @mines_indexes ||= (0...cells_count).to_a.sample(mines)
+    @mines_indexes ||= (0...cells_count).to_a.sample(mines_count)
   end
 end

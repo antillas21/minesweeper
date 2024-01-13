@@ -8,7 +8,7 @@ RSpec.describe BoardGenerator do
       {
         width: width,
         height: height,
-        mines: mines
+        mines_count: mines_count
       }.compact
     end
 
@@ -19,7 +19,7 @@ RSpec.describe BoardGenerator do
     context 'with arguments' do
       let(:width) { 2 }
       let(:height) { 2 }
-      let(:mines) { 2 }
+      let(:mines_count) { 2 }
 
       it 'does not raise error' do
         expect { subject }.to_not raise_error
@@ -43,7 +43,7 @@ RSpec.describe BoardGenerator do
 
         it 'includes elements representing mines as X' do
           resulting_mines = subject.flatten.select { |e| e == described_class::MINE_MARKER }
-          expect(resulting_mines.size).to eq(mines)
+          expect(resulting_mines.size).to eq(mines_count)
         end
       end
     end
