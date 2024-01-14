@@ -1,15 +1,47 @@
-<h2>Welcome to MineSweeper Board Builder</h2>
-
-<%= form_with model: @board, url: boards_path do |form| %>
-  <%= form.label :name, "Add a name to your Minesweeper Board" %>
-  <%= form.text_field :name %>
-  <%= form.label :width, "How many columns?" %>
-  <%= form.text_field :width %>
-  <%= form.label :height, "How many rows?" %>
-  <%= form.text_field :height %>
-  <%= form.label :height, "How many mines?" %>
-  <%= form.text_field :mines_count %>
-  <%= form.label :height, "Enter your email" %>
-  <%= form.text_field :created_by %>
-  <%= form.submit "Create Board" %>
-<% end %>
+<div class="row">
+  <div class="col-8">
+    <h2>Welcome to MineSweeper Board Builder</h2>
+    <hr />
+    <%= form_with model: @board, url: boards_path do |form| %>
+      <div class="row">
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, class: "alert alert-#{name}", role: "alert" %>
+        <% end %>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-12">
+          <%= form.label :name, "Add a name to your Minesweeper Board", class: "form-label" %>
+          <%= form.text_field :name, class: "form-control", required: true %>
+        </div>
+        <div class="col-md-4">
+          <%= form.label :width, "How many columns?", class: "form-label" %>
+          <%= form.number_field :width, class: "form-control" %>
+        </div>
+        <div class="col-md-4">
+          <%= form.label :height, "How many rows?", class: "form-label" %>
+          <%= form.number_field :height, class: "form-control" %>
+        </div>
+        <div class="col-md-4">
+          <%= form.label :mines_count, "How many mines?", class: "form-label" %>
+          <%= form.number_field :mines_count, class: "form-control" %>
+        </div>
+        <div class="col-md-12">
+          <%= form.label :created_by, "Created by", class: "form-label" %>
+          <%= form.email_field :created_by, class: "form-control", placeholder: "you@email.com", required: true %>
+        </div>
+        <%= form.submit "Generate Board", class: "btn btn-primary btn-lg" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <div class="card-header">
+        Most Recent Boards
+      </div>
+      <div class="card-body">
+        <p class="card-text">Coming Soon...</p>
+        <a href="#" class="link-info">Wait for it</a>
+      </div>
+    </div>
+  </div>
+</div>

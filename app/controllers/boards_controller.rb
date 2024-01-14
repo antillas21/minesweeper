@@ -10,7 +10,7 @@ class BoardsController < ApplicationController
 
     redirect_to @board
   rescue => e
-    flash[:notice] = e.message
+    flash.now[:warning] = e.message
     render :new
   end
 
