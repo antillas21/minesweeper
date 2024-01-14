@@ -4,9 +4,9 @@ class BoardGenerator
   end
 
   def initialize(width:, height:, mines_count:)
-    @width = width
-    @height = height
-    @mines_count = mines_count
+    @width = width.to_i
+    @height = height.to_i
+    @mines_count = mines_count.to_i
   end
 
   def call

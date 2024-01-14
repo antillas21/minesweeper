@@ -66,6 +66,7 @@ RSpec.configure do |config|
   # shoulda-matchers
   config.include(Shoulda::Matchers::ActiveModel, type: :model)
   config.include(Shoulda::Matchers::ActiveRecord, type: :model)
+  config.include(Shoulda::Matchers::ActionController, type: :controller)
   # factory-bot methods
   config.include FactoryBot::Syntax::Methods
 end
