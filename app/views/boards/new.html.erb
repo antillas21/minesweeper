@@ -1,1 +1,15 @@
 <h2>Welcome to MineSweeper Board Builder</h2>
+
+<%= form_with model: @board, url: boards_path do |form| %>
+  <%= form.label :name, "Add a name to your Minesweeper Board" %>
+  <%= form.text_field :name %>
+  <%= form.label :width, "How many columns?" %>
+  <%= form.text_field :width %>
+  <%= form.label :height, "How many rows?" %>
+  <%= form.text_field :height %>
+  <%= form.label :height, "How many mines?" %>
+  <%= form.text_field :mines_count %>
+  <%= form.label :height, "Enter your email" %>
+  <%= form.text_field :created_by %>
+  <%= form.submit "Create Board" %>
+<% end %>
