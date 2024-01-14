@@ -46,6 +46,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
   gem "dotenv-rails"
   gem "factory_bot_rails"
+  gem "pry-rails"
 end
 
 group :development do
@@ -65,4 +66,5 @@ group :test do
   gem "selenium-webdriver"
   gem "rspec-rails"
   gem "shoulda-matchers"
+  gem "rails-controller-testing"
 end
