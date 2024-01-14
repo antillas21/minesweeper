@@ -1,2 +1,15 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+// Fontawesome
+
+$fa-font-path: ".";
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import "@fortawesome/fontawesome-free/scss/regular";
+@import "@fortawesome/fontawesome-free/scss/v4-shims";
+
+td.minesweeper-cell {
+  height: 50px;
+  min-width: 50px;
+}
