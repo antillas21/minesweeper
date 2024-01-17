@@ -21,7 +21,9 @@ class BoardsController < ApplicationController
   end
 
   def index
-    @boards = Board.page(params[:page]).per(DEFAULT_PAGE_SIZE)
+    @boards = BoardsQuery.call(filter_params)
+                         .page(params[:page])
+                         .per(DEFAULT_PAGE_SIZE)
   end
 
   private
@@ -40,5 +42,9 @@ class BoardsController < ApplicationController
 
   def most_recent_boards
     @most_recent_boards ||= Board.most_recent
+  end
+
+  def filter_params
+    params.permit(:name, :created_by, :min_mines)
   end
 end

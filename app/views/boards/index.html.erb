@@ -3,6 +3,27 @@
     <h2>All Boards</h2>
   </div>
   <div class="col-12">
+    <hr />
+    <%= form_with url: boards_path, method: :get, class: "row" do |form| %>
+      <div class="col-md-4">
+        <%= form.label :name, "Filter by name:", class: "form-label" %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+      <div class="col-md-4">
+        <%= form.label :created_by, "Filter by author email:", class: "form-label" %>
+        <%= form.email_field :created_by, class: "form-control" %>
+      </div>
+      <div class="col-md-2">
+        <%= form.label :min_mines, "Min mines count:", class: "form-label" %>
+        <%= form.number_field :min_mines, class: "form-control" %>
+      </div>
+      <div class="col-md-2 filter-button">
+        <%= form.submit "Filter", class: "btn btn-primary btn-md" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-12">
+    <hr />
     <table class="table table-striped">
       <thead>
         <tr>
