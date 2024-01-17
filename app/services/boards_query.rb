@@ -24,6 +24,6 @@ class BoardsQuery
       by_name: filters[:name],
       by_author: filters[:created_by],
       by_min_mines: filters[:min_mines]
-    }.compact
+    }.reject { |_, val| val.blank? }
   end
 end
