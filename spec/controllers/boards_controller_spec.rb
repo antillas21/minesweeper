@@ -7,20 +7,29 @@ RSpec.describe BoardsController, type: :controller do
     end
   end
 
+  shared_examples_for 'retrieves most recent boards' do
+    it 'calls #most_recent_boards method' do
+      subject
+      expect(assigns[:most_recent_boards]).to_not be_nil
+    end
+  end
+
   describe '#new' do
     subject { get :new }
 
     it_behaves_like 'renders new board page'
+    it_behaves_like 'retrieves most recent boards'
   end
 
   describe '#create' do
     subject { post :create, params: params }
 
     let(:params) { { board: board_params } }
+    let(:board_params) { nil }
+
+    it_behaves_like 'retrieves most recent boards'
 
     context 'no params provided' do
-      let(:board_params) { nil }
-
       it_behaves_like 'renders new board page'
     end
 
@@ -56,6 +65,36 @@ RSpec.describe BoardsController, type: :controller do
         end
 
         it_behaves_like 'renders new board page'
+      end
+    end
+  end
+
+  describe '#index' do
+    subject { get :index }
+
+    let!(:existing_boards) { FactoryBot.create_list(:board, total_boards_count) }
+    let(:total_boards_count) { 40 }
+
+    it 'renders #index view' do
+      expect(subject).to render_template('index')
+    end
+
+    it 'lists a paginated collection of Board records' do
+      subject
+      expect(assigns[:boards].size).to_not eq(total_boards_count)
+      expect(assigns[:boards].size).to eq(DEFAULT_PAGE_SIZE)
+    end
+
+    describe 'page param' do
+      subject { get :index, params: { page: 2 } }
+
+      it 'receives an optional ?page= param' do
+        expect { subject }.to_not raise_error
+      end
+
+      it 'retrieves corresponding records' do
+        subject
+        expect(assigns[:boards].size).to eq(total_boards_count - DEFAULT_PAGE_SIZE)
       end
     end
   end

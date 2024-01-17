@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-12">
+    <h2>All Boards</h2>
+  </div>
+  <div class="col-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Size</th>
+          <th scope="col">Total Mines</th>
+          <th scope="col">Created by</th>
+          <th scope="col">Created on</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @boards.each do |board| %>
+          <tr>
+            <td><%= link_to board.name, board_path(board) %></td>
+            <td><%= "#{board.width} x #{board.height}" %></td>
+            <td><%= board.mines_count %></td>
+            <td><%= board.created_by %></td>
+            <td><%= board.created_at.strftime(FRIENDLY_TIME_FORMAT) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-12">
+    <%= paginate @boards %>
+  </div>
+</div>

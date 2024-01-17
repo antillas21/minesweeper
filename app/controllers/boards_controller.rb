@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_action :most_recent_boards, except: %i[show]
+  before_action :most_recent_boards, except: %i[show index]
 
   def new
     @board = Board.new
@@ -18,6 +18,10 @@ class BoardsController < ApplicationController
 
   def show
     @board = Board.find(params[:id])
+  end
+
+  def index
+    @boards = Board.page(params[:page]).per(DEFAULT_PAGE_SIZE)
   end
 
   private
