@@ -14,6 +14,8 @@ RSpec.describe Board, type: :model do
     it { is_expected.to validate_numericality_of(:height).is_greater_than(0) }
     it { is_expected.to validate_numericality_of(:mines_count).is_greater_than(0) }
 
+    it { is_expected.to validate_uniqueness_of(:name) }
+
     describe 'created_by validation' do
       subject { build(:board, created_by: email) }
 
@@ -27,6 +29,20 @@ RSpec.describe Board, type: :model do
         let(:email) { 'foo@something.x' }
 
         it { is_expected.to be_invalid }
+      end
+    end
+
+    describe 'scopes' do
+      describe '.most_recent' do
+        subject { described_class.most_recent }
+
+        let!(:old_boards) { FactoryBot.create_list(:board, 15, created_at: 1.hour.ago) }
+        let!(:recent_boards) { FactoryBot.create_list(:board, 10, created_at: 1.minute.ago) }
+
+        it 'retrieves most recent boards' do
+          expect(subject).to include(*recent_boards)
+          expect(subject).to_not include(*old_boards)
+        end
       end
     end
   end

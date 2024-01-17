@@ -38,8 +38,18 @@
       <div class="card-header">
         Most Recent Boards
       </div>
-      <div class="card-body">
-        <p class="card-text">Coming Soon...</p>
+      <ul class="list-group list-group-flush">
+        <% @most_recent_boards.each do |board| %>
+          <li class="list-group-item">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold"><%= link_to board.name, board_path(board)  %></div>
+              <p class="form-text">Created by <%= board.created_by %><br />
+              <%= board.created_at.strftime(FRIENDLY_TIME_FORMAT) %></p>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+      <div class="card-footer">
         <a href="#" class="link-info">Wait for it</a>
       </div>
     </div>

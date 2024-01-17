@@ -1,4 +1,6 @@
 class BoardsController < ApplicationController
+  before_action :most_recent_boards, except: %i[show]
+
   def new
     @board = Board.new
   end
@@ -30,5 +32,9 @@ class BoardsController < ApplicationController
           .permit(:width, :height, :mines_count)
           .to_h
           .symbolize_keys
+  end
+
+  def most_recent_boards
+    @most_recent_boards ||= Board.most_recent
   end
 end

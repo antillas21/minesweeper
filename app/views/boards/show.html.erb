@@ -7,7 +7,7 @@
         Created by: <%= @board.created_by %>
       </div>
       <div class="col-md-6">
-        Created on: <%= @board.created_at.strftime('%b %d, %Y at %I:%M%P') %>
+        Created on: <%= @board.created_at.strftime(FRIENDLY_TIME_FORMAT) %>
       </div>
       <div class="col-md-8">
         <table class="table table-bordered">
