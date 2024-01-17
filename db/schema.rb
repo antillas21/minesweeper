@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_13_052224) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_17_065447) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_13_052224) do
     t.text "layout", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["created_by"], name: "index_boards_on_created_by"
+    t.index ["mines_count"], name: "index_boards_on_mines_count"
+    t.index ["name"], name: "index_boards_on_name", unique: true
   end
 
 end
